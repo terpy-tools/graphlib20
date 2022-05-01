@@ -8,7 +8,7 @@
 #include <utility>
 #include "Common.hpp"
 
-namespace GraphLib {
+namespace GraphLib20 {
     template<class NodeType = unsigned, class NodeAttrType = AnyAttrType, class EdgeAttrType = AnyAttrType>
     class CustomMappedGraph {
       public:
@@ -17,8 +17,8 @@ namespace GraphLib {
         using AdjacencySubMapType = std::map<NodeType, EdgeAttrType>;
         using AdjacencyMapType = std::map<NodeType, AdjacencySubMapType>;
 
-        struct NodesView {
-            NodesView(NodeMapType& node_map) : _node_map(node_map) {};
+        struct NodeView {
+            NodeView(NodeMapType& node_map) : _node_map(node_map) {};
 
             NodeAttrType& operator[](NodeType n) {
                 return _node_map[n];
@@ -40,7 +40,7 @@ namespace GraphLib {
             NodeMapType& _node_map;
         };
 
-        struct SubEdgesView {
+        struct OutEdgeView {
             struct Iterator {
                 using InnerIteratorType = AdjacencySubMapType::iterator;
                 using iterator_category = std::forward_iterator_tag;
@@ -64,7 +64,7 @@ namespace GraphLib {
                 InnerIteratorType _inner_it;
                 NodeType _n;
             };
-            SubEdgesView(AdjacencyMapType& adjacency_map, NodeType& n) : _adjacency_map(adjacency_map), _n(n) {};
+            OutEdgeView(AdjacencyMapType& adjacency_map, NodeType& n) : _adjacency_map(adjacency_map), _n(n) {};
             auto begin() {
                 return Iterator(_adjacency_map[_n].begin(), _n);
             };
@@ -77,7 +77,7 @@ namespace GraphLib {
             NodeType _n;
         };
 
-        struct EdgesView {
+        struct EdgeView {
             struct Iterator {
                 // Based on Ref.: https://stackoverflow.com/a/3623597/15141722
                 // Copyright (c) 2010 James McNellis
@@ -130,7 +130,7 @@ namespace GraphLib {
                     };
                 };
             };
-            EdgesView(AdjacencyMapType& adjacency_map) : _adjacency_map(adjacency_map) {};
+            EdgeView(AdjacencyMapType& adjacency_map) : _adjacency_map(adjacency_map) {};
 
             EdgeAttrType& operator[](EdgeType e) {
                 return _adjacency_map[e[0]][e[1]];
@@ -168,20 +168,20 @@ namespace GraphLib {
             return e;
         };
 
-        NodesView nodes() {
-            return NodesView(_node_map);
+        NodeView nodes() {
+            return NodeView(_node_map);
         };
 
         auto neighbors(NodeType n) {
             return std::views::keys(_adjacency_map.at(n));
         };
 
-        EdgesView edges() {
-            return EdgesView(_adjacency_map);
+        EdgeView edges() {
+            return EdgeView(_adjacency_map);
         };
 
-        SubEdgesView edges(NodeType n) {
-            return SubEdgesView(_adjacency_map, n);
+        OutEdgeView edges(NodeType n) {
+            return OutEdgeView(_adjacency_map, n);
         };
 
         unsigned number_of_nodes() {

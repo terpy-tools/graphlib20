@@ -7,13 +7,13 @@ inline const char* print_function_name(const std::source_location& location = st
     return location.function_name();
 };
 
-namespace GraphLib {
+namespace GraphLib20 {
     struct NoAttr {};
     using AnyAttrType = std::map<std::string, std::any>;
     using EnumAnyAttrType = std::map<int, std::any>;
 };
 
-namespace GraphLib::MapTools {
+namespace GraphLib20::MapTools {
     static const size_t npos = -1;
 
     template<template <class, class> class MapType, class KeyType, class ValType>
@@ -64,7 +64,7 @@ namespace GraphLib::MapTools {
     };
 };
 
-namespace GraphLib::ListTools {
+namespace GraphLib20::ListTools {
     static const size_t npos = -1;
 
     template<class ListType>
@@ -83,7 +83,7 @@ namespace GraphLib::ListTools {
     };
 };
 
-namespace GraphLib::MatTools {
+namespace GraphLib20::MatTools {
     template<class MatType>
     void remove_idx(const MatType& mat, unsigned idx) {
         // Based on Ref.: https://stackoverflow.com/a/46303314
