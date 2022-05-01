@@ -6,7 +6,7 @@
 #include <map>
 #include <any>
 #include <utility>
-#include <GraphLib/Common.hpp>
+#include "Common.hpp"
 
 namespace GraphLib {
     template<class NodeType = unsigned, class NodeAttrType = AnyAttrType, class EdgeAttrType = AnyAttrType>

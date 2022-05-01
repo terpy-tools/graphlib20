@@ -1,2 +1,2 @@
 #pragma once
-#include <GraphLib/MappedGraph.hpp>
+#include "MappedGraph.hpp"
