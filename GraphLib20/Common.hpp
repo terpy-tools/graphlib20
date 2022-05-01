@@ -31,25 +31,28 @@ namespace GraphLib20::MapTools {
         auto it = map.find(key);
         if (it != map.end()) {
             map.erase(it);
-        } else {
-            throw std::out_of_range(print_function_name());
         };
     };
 
     template<class MapType, class KeyType>
     void shifted_del(MapType& map, KeyType key) {
         bool key_found = false;
-        for (auto it = map.rbegin(); it != map.rend(); ++it) {
-            if (it->first == key) {
-                map.erase(it->first);
-                key_found = true;
-            } else if (it->first > key) {
-                auto handle = map.extract(it->first);
-                handle.key() -= KeyType(1);
+        auto it = map.begin();
+        // Find and remove the key
+        for (it; it != map.end(); ++it) {
+            if (it->first >= key) {
+                if (it->first == key) {
+                    it = map.erase(it);
+                    key_found = true;
+                };
+                break;
             };
         };
-        if (!key_found) {
-            throw std::out_of_range(print_function_name());
+        // Decrement all subsequent keys
+        for (it; it != map.end(); ++it) {
+            auto handle = map.extract(it->first);
+            handle.key() -= KeyType(1);
+            map.insert(std::move(handle));
         };
     };
 

@@ -229,7 +229,7 @@ namespace GraphLib20 {
 
         void remove_node(unsigned n) {
             for (const auto &other : this->nodes()) {
-                MapTools::del(this->_adjacency_map[other], n);
+                MapTools::shifted_del(this->_adjacency_map[other], n);
             };
             MapTools::shifted_del(this->_adjacency_map, n);
             MapTools::shifted_del(this->_node_map, n);
