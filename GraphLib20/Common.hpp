@@ -10,6 +10,7 @@ inline const char* print_function_name(const std::source_location& location = st
 namespace GraphLib {
     struct NoAttr {};
     using AnyAttrType = std::map<std::string, std::any>;
+    using EnumAnyAttrType = std::map<int, std::any>;
 };
 
 namespace GraphLib::MapTools {
