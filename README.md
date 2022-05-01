@@ -1,2 +1,2 @@
 # GraphLib
-A C++20 header-only library for undirected graphs
+A C++20 template library for undirected graphs
