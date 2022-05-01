@@ -96,10 +96,10 @@ namespace GraphLib20 {
 
         void remove_node(unsigned n) {
             for (const auto &other : this->nodes()) {
-                MapTools::shifted_del(this->_adjacency_map[other], n);
+                MapTools::del_and_shift(this->_adjacency_map[other], n);
             };
-            MapTools::shifted_del(this->_adjacency_map, n);
-            MapTools::shifted_del(this->_node_map, n);
+            MapTools::del_and_shift(this->_adjacency_map, n);
+            MapTools::del_and_shift(this->_node_map, n);
         };
     };
 };

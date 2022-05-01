@@ -41,7 +41,7 @@ namespace GraphLib20::MapTools {
     };
 
     template<class MapType, class KeyType>
-    void shifted_del(MapType& map, KeyType key) {
+    void del_and_shift(MapType& map, KeyType key) {
         bool key_found = false;
         auto it = map.begin();
         // Find and remove the key
