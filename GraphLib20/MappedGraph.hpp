@@ -4,7 +4,9 @@
 #include <ranges>
 #include <iterator>
 #include "Common.hpp"
-#include "Views.hpp"
+#include "Views/MappedNodeView.hpp"
+#include "Views/MappedEdgeView.hpp"
+#include "Views/MappedOutEdgeView.hpp"
 
 namespace GraphLib20 {
     template<class NodeType = unsigned, class NodeAttrType = AnyAttrType, class EdgeAttrType = AnyAttrType>
@@ -15,8 +17,8 @@ namespace GraphLib20 {
         using AdjacencySubMapType = std::map<NodeType, EdgeAttrType>;
         using AdjacencyMapType = std::map<NodeType, AdjacencySubMapType>;
         using NodeViewType = MappedNodeView<NodeType, NodeAttrType>;
-        using OutEdgeViewType = MappedOutEdgeView<NodeType, EdgeAttrType>;
         using EdgeViewType = MappedEdgeView<NodeType, EdgeAttrType>;
+        using OutEdgeViewType = MappedOutEdgeView<NodeType, EdgeAttrType>;
 
         NodeType add_node(NodeType n, NodeAttrType node_attr={}) {
             _node_map[n] = node_attr;
