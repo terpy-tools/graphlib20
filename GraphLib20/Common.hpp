@@ -1,4 +1,10 @@
 #pragma once
+#include <any>
+#include <map>
+#include <string>
+#include <iterator>
+#include <algorithm>
+#include <utility>
 #include <stdexcept>
 #include <source_location>
 
